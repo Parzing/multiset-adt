@@ -46,4 +46,5 @@ public abstract class MultiSet {
      * @return Size of the multiset
      */
     abstract Integer size();
+    abstract void doNothing();
 }
