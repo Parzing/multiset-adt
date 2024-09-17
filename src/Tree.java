@@ -19,11 +19,11 @@ public class Tree {
     }
 
     public boolean isEmpty(){
-        return this.root.isEmpty();
+        return root.isEmpty();
     }
 
     public int length(){
-        if(this.isEmpty()){
+        if(isEmpty()){
             return 0;
         }
         int size = 1;
@@ -34,14 +34,14 @@ public class Tree {
     }
 
     public int count(int item){
-        if(this.isEmpty()){
+        if(isEmpty()){
             return 0;
         }
         int num = 0;
-        if(this.root.get().equals(item)){
+        if(root.get().equals(item)){
             num += 1;
         }
-        for(Tree subtree : this.subtrees){
+        for(Tree subtree : subtrees){
             num += subtree.count(item);
         }
         return num;
@@ -49,18 +49,18 @@ public class Tree {
 
 
     public float average(){
-        if(this.isEmpty()){
+        if(isEmpty()){
             return 0.0f;
         }
-        int[] avgValues = this.averageHelper();
+        int[] avgValues = averageHelper();
         return 0.0f;
     }
 
     private int[] averageHelper(){
-        if(this.isEmpty()){
+        if(isEmpty()){
             return new int[]{0,0};
         }
-        int total = this.root.get();
+        int total = root.get();
         int size = 1;
         for (Tree subtree : subtrees) {
             int[] totalAndSize = subtree.averageHelper();
@@ -74,7 +74,7 @@ public class Tree {
         if(this.isEmpty()){
             return false;
         }
-        if(this.root.get().equals(item)){
+        if(root.get().equals(item)){
             return true;
         }
         for(Tree subtree : subtrees){
@@ -86,8 +86,23 @@ public class Tree {
     }
 
     public int[] leaves(){
-
-        return new int[]{};
+        if(isEmpty()){
+            return new int[]{};
+        }
+        if(subtrees.isEmpty()){
+            return new int[]{root.get()};
+        }
+        ArrayList<Integer> leaves = new ArrayList<Integer>();
+        for (Tree subtree : subtrees){
+            for(int leaf : subtree.leaves()){
+                leaves.add(leaf);
+            }
+        }
+        int[] leafList = new int[leaves.size()];
+        for (int i = 0; i < leaves.size(); i++){
+            leafList[i] = leaves.get(i);
+        }
+        return leafList;
     }
 
     public boolean deleteItem(int item){
