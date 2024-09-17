@@ -48,22 +48,44 @@ public class Tree {
 
 
     public float average(){
-        // TODO
+        if(this.isEmpty()){
+            return 0.0f;
+        }
+        int[] avgValues = this.averageHelper();
         return 0.0f;
     }
 
-    private int[] average_helper(){
-        // TODO
-        return new int[]{0};
+    private int[] averageHelper(){
+        if(this.isEmpty()){
+            return new int[]{0,0};
+        }
+        int total = this.root.get();
+        int size = 1;
+        for (Tree subtree : subtrees) {
+            int[] totalAndSize = subtree.averageHelper();
+            total += totalAndSize[0];
+            size += totalAndSize[1];
+        }
+        return new int[]{total, size};
     }
 
     public boolean contains(int item){
-        // TODO
+        if(this.isEmpty()){
+            return false;
+        }
+        if(this.root.get().equals(item)){
+            return true;
+        }
+        for(Tree subtree : subtrees){
+            if(subtree.contains(item)){
+                return true;
+            }
+        }
         return false;
     }
 
     public int[] leaves(){
-        // TODO
+
         return new int[]{};
     }
 
@@ -104,7 +126,7 @@ public class Tree {
 
     @Override
     public boolean equals(Object other){
-        // TODO
+
         return true;
     }
 
