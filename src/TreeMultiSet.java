@@ -1,9 +1,11 @@
+import java.util.Optional;
+
 public class TreeMultiSet extends MultiSet {
 
     Tree tree;
 
     public TreeMultiSet() {
-        this.tree = new Tree(null);
+        this.tree = new Tree(Optional.empty());
     }
     /**
      * Add the given item to this multiset.
