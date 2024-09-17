@@ -13,12 +13,18 @@ public class Tree {
     }
 
     public boolean isEmpty(){
-        return this.root == null;
+        return this.root.isEmpty();
     }
 
     public int length(){
-
-        return 0;
+        if(this.isEmpty()){
+            return 0;
+        }
+        int size = 1;
+        for(Tree tree : subtrees){
+            size += tree.length();
+        }
+        return size;
     }
 
     public int count(int item){
