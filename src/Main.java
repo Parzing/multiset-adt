@@ -19,16 +19,16 @@ public class Main {
 
         assert input.size() == n;
 
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
 
         for (int x : itemsAdded) {
             input.remove(x);
         }
 
-        long end = System.nanoTime();
+        long end = System.currentTimeMillis();
 
         assert input.isEmpty();
 
-        System.out.printf("%5d   %-37s %.6f ns\n", n, input.getClass().getSimpleName(), (end - start)/1000_000.0);
+        System.out.printf("%5d   %37s %2.6f\n", n, input.getClass().getSimpleName(), (end - start)/1000.0);
     }
 }
