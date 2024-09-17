@@ -1,27 +1,23 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 public class Tree {
-    private int root;
+    private Optional<Integer> root;
     private ArrayList<Tree> subtrees;
 
-    public Tree(int root, Tree[] subtrees){
+    public Tree(Optional<Integer> root, Tree[] subtrees){
         this.root = root;
         this.subtrees = new ArrayList<Tree>();
         this.subtrees.addAll(Arrays.asList(subtrees));
     }
-    public Tree(int root){
-        this.root = root;
-        this.subtrees = new ArrayList<Tree>();
-    }
 
     public boolean isEmpty(){
-        // TODO
-        return false;
+        return this.root == null;
     }
 
     public int length(){
-        // TODO
+
         return 0;
     }
 
