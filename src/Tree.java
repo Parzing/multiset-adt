@@ -116,18 +116,46 @@ public class Tree {
 
     @Override
     public String toString(){
-        // TODO
         return stringIndented(0);
     }
 
     private String stringIndented(int depth){
-        return "";
+        if (this.isEmpty()) {
+            return "";
+        } else {
+            StringBuilder s = new StringBuilder();
+            s.append("  ".repeat(depth));
+            s.append(root);
+            s.append('\n');
+            for (Tree subtree : subtrees) {
+                s.append(subtree.stringIndented(depth + 1));
+            }
+            return s.toString();
+        }
     }
 
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
+        if (!(other instanceof Tree)) {
+            return false;
+        }
 
-        return true;
+        Tree otherTree = (Tree) other;
+
+        if (this.isEmpty() && otherTree.isEmpty()) {
+            return true;
+        } else if (this.root != otherTree.root) {
+            return false;
+        } else if (this.subtrees.size() != otherTree.subtrees.size()) {
+            return false;
+        } else {
+            for (int i = 0; i < this.subtrees.size(); i++) {
+                if (!this.subtrees.get(i).equals(otherTree.subtrees.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 
