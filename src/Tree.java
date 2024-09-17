@@ -103,9 +103,27 @@ public class Tree {
     }
 
     @Override
-    public boolean equals(Object other){
-        // TODO
-        return true;
+    public boolean equals(Object other) {
+        if (!(other instanceof Tree)) {
+            return false;
+        }
+
+        Tree otherTree = (Tree) other;
+
+        if (this.isEmpty() && otherTree.isEmpty()) {
+            return true;
+        } else if (this.root != otherTree.root) {
+            return false;
+        } else if (this.subtrees.size() != otherTree.subtrees.size()) {
+            return false;
+        } else {
+            for (int i = 0; i < this.subtrees.size(); i++) {
+                if (!this.subtrees.get(i).equals(otherTree.subtrees.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 
