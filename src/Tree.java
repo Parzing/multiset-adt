@@ -33,8 +33,17 @@ public class Tree {
     }
 
     public int count(int item){
-        // TODO
-        return 0;
+        if(this.isEmpty()){
+            return 0;
+        }
+        int num = 0;
+        if(this.root.get().equals(item)){
+            num += 1;
+        }
+        for(Tree subtree : this.subtrees){
+            num += subtree.count(item);
+        }
+        return num;
     }
 
 
