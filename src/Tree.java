@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Random;
 
 public class Tree {
     private Optional<Integer> root;
@@ -90,29 +91,80 @@ public class Tree {
     }
 
     public boolean deleteItem(int item){
-        // TODO
-        return true;
+        if (isEmpty()) {
+            return false;
+        } else if (root.get() == item) { //root.isPresent() implied by check above
+            deleteRoot();
+        } else {
+            for (Tree subtree : subtrees) {
+                boolean deleted = subtree.deleteItem(item);
+                if (deleted && subtree.isEmpty()) {
+                    subtrees.remove(subtree); //mutating list while looping is ok b/c we return immediately
+                    return true;
+                } else if (deleted) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void deleteRoot(){
-        // TODO
+        if (isEmpty()) {
+            root = Optional.empty();
+        } else {
+            Tree chosenSubtree = subtrees.remove(subtrees.size() - 1); //last subtree
+            root = chosenSubtree.root;
+            subtrees.addAll(chosenSubtree.subtrees);
+        }
     }
 
     private int extractLeaf(){
-        // TODO
-        return 0;
+        if (subtrees.isEmpty()) {
+            Optional<Integer> oldRoot = root;
+            root = Optional.empty();
+            return oldRoot.get();  //precondition requires root.isPresent()
+        } else {
+            int leaf = subtrees.get(0).extractLeaf();
+            // Need to check whether self._subtrees[0] is now empty,
+            // and if so, remove it.
+            if (subtrees.get(0).isEmpty()) {
+                subtrees.remove(0);
+            }
+            return leaf;
+        }
     }
 
     public void insert(int item){
-        // TODO
+        if (isEmpty()) {
+            root = Optional.of(item);
+        } else if (subtrees.isEmpty()) {  //root.isPresent() is implied by the case above
+            subtrees.add(new Tree(Optional.of(item)));
+        } else {
+            Random random = new Random();
+            if (random.nextInt(3) == 0) {
+                subtrees.add(new Tree(Optional.of(item)));
+            } else {
+                int subtreeIndex = random.nextInt(subtrees.size());
+                subtrees.get(subtreeIndex).insert(item);
+            }
+        }
     }
 
     public boolean insertChild(int item, int parent){
-        // TODO
+        if (isEmpty()) {
+            return false;
+        } else if (root.get() == parent) {  //root.isPresent() is implied by the case above
+            subtrees.add(new Tree(Optional.of(item)));
+        } else {
+            for (Tree subtree : subtrees) {
+                if (subtree.insertChild(item, parent)) {
+                    return true;
+                }
+            }
+        }
         return true;
     }
-
-
 
     @Override
     public String toString(){
