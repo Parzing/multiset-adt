@@ -12,6 +12,11 @@ public class Tree {
         this.subtrees.addAll(Arrays.asList(subtrees));
     }
 
+    public Tree(Optional<Integer> root){
+        this.root = root;
+        this.subtrees = new ArrayList<Tree>();
+    }
+
     public boolean isEmpty(){
         return this.root == null;
     }
