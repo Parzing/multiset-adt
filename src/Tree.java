@@ -94,12 +94,22 @@ public class Tree {
 
     @Override
     public String toString(){
-        // TODO
         return stringIndented(0);
     }
 
     private String stringIndented(int depth){
-        return "";
+        if (this.isEmpty()) {
+            return "";
+        } else {
+            StringBuilder s = new StringBuilder();
+            s.append("  ".repeat(depth));
+            s.append(root);
+            s.append('\n');
+            for (Tree subtree : subtrees) {
+                s.append(subtree.stringIndented(depth + 1));
+            }
+            return s.toString();
+        }
     }
 
     @Override
