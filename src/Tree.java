@@ -127,11 +127,15 @@ public class Tree {
     private void deleteRoot(){
         if (isEmpty()) {
             root = Optional.empty();
-        } else {
-            Tree chosenSubtree = subtrees.remove(subtrees.size() - 1); //last subtree
-            root = chosenSubtree.root;
-            subtrees.addAll(chosenSubtree.subtrees);
+            return;
         }
+        if(subtrees.isEmpty()){
+            return;
+        }
+        Tree chosenSubtree = subtrees.remove(subtrees.size() - 1); //last subtree
+        root = chosenSubtree.root;
+        subtrees.addAll(chosenSubtree.subtrees);
+
     }
 
     private int extractLeaf(){

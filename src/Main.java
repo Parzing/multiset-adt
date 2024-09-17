@@ -3,7 +3,9 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        profileMultiSet(new TreeMultiSet(), 500);
+        for(int num : new int[]{500, 1000, 2000, 4000}){
+            profileMultiSet(new TreeMultiSet(), num);
+        }
     }
 
     private static void profileMultiSet(MultiSet input, int n) {
@@ -17,16 +19,16 @@ public class Main {
 
         assert input.size() == n;
 
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
 
         for (int x : itemsAdded) {
             input.remove(x);
         }
 
-        long end = System.currentTimeMillis();
+        long end = System.nanoTime();
 
         assert input.isEmpty();
 
-        System.out.printf("%5d, %-37s, %.6f\n", n, input.getClass().getSimpleName(), (end - start)/1000.0);
+        System.out.printf("%5d   %-37s %.6f ns\n", n, input.getClass().getSimpleName(), (end - start)/1000_000.0);
     }
 }
