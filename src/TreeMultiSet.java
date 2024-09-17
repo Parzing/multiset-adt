@@ -1,6 +1,10 @@
 public class TreeMultiSet extends MultiSet {
 
-    // TODO add a Tree object as a private instance variable for this class.
+    Tree tree;
+
+    public TreeMultiSet() {
+        this.tree = new Tree(null);
+    }
     /**
      * Add the given item to this multiset.
      *
@@ -8,33 +12,31 @@ public class TreeMultiSet extends MultiSet {
      */
     @Override
     void add(Integer item) {
-        // TODO complete this method
+        this.tree.insert(item);
     }
 
     @Override
     void remove(Integer item) {
-
+        this.tree.deleteItem(item);
     }
 
     @Override
     boolean contains(Integer item) {
-        return false;
+        return this.tree.contains(item);
     }
 
     @Override
     boolean isEmpty() {
-        return false;
+        return this.tree.isEmpty();
     }
 
     @Override
     Integer count(Integer item) {
-        return null;
+        return this.tree.count(item);
     }
 
     @Override
     Integer size() {
-        return null;
+        return this.tree.length();
     }
-    // TODO write the rest of the implementation for this class so that it uses its private Tree
-    //      object to provide the MultiSet functionality.
 }
